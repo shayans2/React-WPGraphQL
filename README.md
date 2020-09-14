@@ -13,8 +13,9 @@ npm start
 ```
 
 ## Features
- - Minimal and Responsive design
+ - Minimal and Responsive Design
  - Reusable Components
+ - Custom Form Hook
  - Data Prefetching
  - Custom Pages
  - Comments
