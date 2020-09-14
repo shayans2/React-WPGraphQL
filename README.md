@@ -3,7 +3,7 @@
 A minimal blog using React, Tailwindcss, WPGraphQL and Apollo Client 🚀
 
 ## Usage
-Clone project then do
+Clone project then set your gql endpoint in App.js
 ```bash
 npm install
 ```
