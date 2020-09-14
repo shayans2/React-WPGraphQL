@@ -18,7 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: "", // Use your WPGraphql url here. example: http://yourwebsite.com/wordpress/graphql
+    uri: "https://baharbeauty.co/graphql", // Use your WPGraphql url here. example: http://yourwebsite.com/wordpress/graphql
   });
 
   return (

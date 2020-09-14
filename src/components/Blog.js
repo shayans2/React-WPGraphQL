@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { GET_ALL_POSTS } from "../graphql/queries/blog";
 import Resource from "../containers/Resource";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
 const HomePage = ({ preFetchPost }) => {
+  const [offset, setOffset] = useState(5);
   return (
     <Resource
       query={GET_ALL_POSTS}
+      options={{
+        variables: {
+          first: offset,
+        },
+      }}
       render={(data) => (
         <section className="mb-56">
           <div className="flex flex-row justify-between items-center mb-10">
@@ -38,6 +44,14 @@ const HomePage = ({ preFetchPost }) => {
               </p>
             </div>
           ))}
+          {data.posts.pageInfo.hasNextPage && (
+            <button
+              className="text-xl font-bold"
+              onClick={() => setOffset(offset + 5)}
+            >
+              Load More...
+            </button>
+          )}
         </section>
       )}
     />

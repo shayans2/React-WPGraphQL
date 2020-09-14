@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const GET_POST = gql`
-  query GET_POST($uri: String!) {
+  query GET_POST_BY_URI($uri: String!) {
     postBy(uri: $uri) {
       id
       databaseId
