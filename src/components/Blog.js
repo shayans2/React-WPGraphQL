@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { GET_ALL_POSTS } from "../graphql/queries/blog";
 import Resource from "../containers/Resource";
 import { Link } from "react-router-dom";
 import _ from "lodash";
 
 const HomePage = ({ preFetchPost }) => {
-  const [offset, setOffset] = useState(5);
+  const offset = 10;
+  const updateQuery = (previousResult, { fetchMoreResult }) => {
+    return fetchMoreResult.posts.edges.length
+      ? fetchMoreResult
+      : previousResult;
+  };
   return (
     <Resource
       query={GET_ALL_POSTS}
@@ -14,7 +19,7 @@ const HomePage = ({ preFetchPost }) => {
           first: offset,
         },
       }}
-      render={(data) => (
+      render={(data, fetchMore) => (
         <section className="mb-56">
           <div className="flex flex-row justify-between items-center mb-10">
             <span className="text-5xl font-bold"> Blog </span>
@@ -44,14 +49,43 @@ const HomePage = ({ preFetchPost }) => {
               </p>
             </div>
           ))}
-          {data.posts.pageInfo.hasNextPage && (
+
+          {data.posts.pageInfo.hasPreviousPage ? (
+            <button
+              className="text-xl font-bold mr-3"
+              onClick={() => {
+                fetchMore({
+                  variables: {
+                    first: null,
+                    after: null,
+                    last: offset,
+                    before: data.posts.pageInfo.startCursor || null,
+                  },
+                  updateQuery,
+                });
+              }}
+            >
+              &larr; Previous
+            </button>
+          ) : null}
+          {data.posts.pageInfo.hasNextPage ? (
             <button
               className="text-xl font-bold"
-              onClick={() => setOffset(offset + 5)}
+              onClick={() => {
+                fetchMore({
+                  variables: {
+                    first: offset,
+                    after: data.posts.pageInfo.endCursor || null,
+                    last: null,
+                    before: null,
+                  },
+                  updateQuery,
+                });
+              }}
             >
-              Load More...
+              Next &rarr;
             </button>
-          )}
+          ) : null}
         </section>
       )}
     />
