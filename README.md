@@ -6,4 +6,5 @@ A minimal blog using React, Tailwindcss, WPGraphQL and Apollo Client 🚀
  - Minimal and Responsive design
  - Reusable Components
  - Data Prefetching
-And more...
+ - Custom Pages
+ - Comments
