@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GET_ALL_POSTS } from "../graphql/queries/blog";
 import Resource from "../containers/Resource";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import _ from "lodash";
 
 const HomePage = ({ preFetchPost }) => {
   const offset = 10;
+  const [loading, setLoading] = useState(false);
   const updateQuery = (previousResult, { fetchMoreResult }) => {
     return fetchMoreResult.posts.edges.length
       ? fetchMoreResult
@@ -50,10 +51,11 @@ const HomePage = ({ preFetchPost }) => {
             </div>
           ))}
 
-          {data.posts.pageInfo.hasPreviousPage ? (
+          {!loading && data.posts.pageInfo.hasPreviousPage ? (
             <button
               className="text-xl font-bold mr-3"
               onClick={() => {
+                setLoading(true);
                 fetchMore({
                   variables: {
                     first: null,
@@ -62,16 +64,17 @@ const HomePage = ({ preFetchPost }) => {
                     before: data.posts.pageInfo.startCursor || null,
                   },
                   updateQuery,
-                });
+                }).then((res) => setLoading(false));
               }}
             >
               &larr; Previous
             </button>
           ) : null}
-          {data.posts.pageInfo.hasNextPage ? (
+          {!loading && data.posts.pageInfo.hasNextPage ? (
             <button
               className="text-xl font-bold"
               onClick={() => {
+                setLoading(true);
                 fetchMore({
                   variables: {
                     first: offset,
@@ -80,12 +83,13 @@ const HomePage = ({ preFetchPost }) => {
                     before: null,
                   },
                   updateQuery,
-                });
+                }).then((res) => setLoading(false));
               }}
             >
               Next &rarr;
             </button>
           ) : null}
+          {loading && <span className="text-xl font-bold">Loading...</span>}
         </section>
       )}
     />
