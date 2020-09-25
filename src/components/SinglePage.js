@@ -1,5 +1,4 @@
 import React from "react";
-import ReactHtmlParser from "react-html-parser";
 import Resource from "../containers/Resource";
 import { GET_PAGE } from "../graphql/queries/singlePage";
 
@@ -27,9 +26,7 @@ const SinglePost = ({ match }) => {
           <h1 className="text-gray-900 font-bold text-5xl mb-2">
             {data.page.title}
           </h1>
-          <div className="text-gray-800 font-light text-lg">
-            {ReactHtmlParser(data.page.content)}
-          </div>
+          <div className="text-gray-800 font-light text-lg" dangerouslySetInnerHTML={{ __html: data.page.content}}></div>
         </div>
       )}
     />

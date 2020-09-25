@@ -1,5 +1,4 @@
 import React from "react";
-import ReactHtmlParser from "react-html-parser";
 import Resource from "../containers/Resource";
 import { GET_POST } from "../graphql/queries/singlePost";
 import CommentsFormContainer from "../containers/CommentsForm";
@@ -38,9 +37,7 @@ const SinglePost = ({ match }) => {
               </span>
             ))}
           </p>
-          <div className="text-gray-800 font-light text-lg">
-            {ReactHtmlParser(data.postBy.content)}
-          </div>
+          <div className="text-gray-800 font-light text-lg" dangerouslySetInnerHTML={{ __html: data.postBy.content }}></div>
           <div className="mt-24">
             <h2 className="text-gray-800 font-bold text-2xl">Comments</h2>
 
@@ -62,9 +59,7 @@ const SinglePost = ({ match }) => {
                           {comment.author.node.name}
                         </h2>
                       </div>
-                      <p className="mt-1 text-gray-700 text-sm">
-                        {ReactHtmlParser(comment.content)}
-                      </p>
+                      <div className="mt-1 text-gray-700 text-sm" dangerouslySetInnerHTML={{ __html: comment.content }}></div>
                     </div>
                   </div>
                 </div>
