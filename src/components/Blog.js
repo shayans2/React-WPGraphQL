@@ -21,7 +21,7 @@ const HomePage = ({ preFetchPost }) => {
         },
       }}
       render={(data, fetchMore) => (
-        <section className="mb-56">
+        <section className="mb-56 animate__animated animate__fadeIn">
           <div className="flex flex-row justify-between items-center mb-10">
             <span className="text-5xl font-bold"> Blog </span>
           </div>

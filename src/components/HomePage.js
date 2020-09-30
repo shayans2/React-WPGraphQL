@@ -17,7 +17,7 @@ const HomePage = ({ preFetchPost }) => {
         }}
         render={(data) => (
           <Fragment>
-            <section className="mb-64 mt-40">
+            <section className="mb-64 mt-40 animate__animated animate__fadeIn">
               <h1 className="text-gray-900 font-bold text-5xl mb-4">
                 {data.page.title}
               </h1>

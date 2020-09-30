@@ -12,7 +12,7 @@ const SinglePost = ({ match }) => {
         },
       }}
       render={(data) => (
-        <div>
+        <div className="animate__animated animate__fadeIn">
           {data.page.featuredImage && (
             <div className="mb-10">
               <img

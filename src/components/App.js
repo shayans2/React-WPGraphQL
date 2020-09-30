@@ -14,6 +14,7 @@ import NotFound from "../components/errors/404";
 
 import "../dist/css/tailwind.css";
 import "react-toastify/dist/ReactToastify.css";
+import "animate.css"
 
 const App = () => {
   const client = new ApolloClient({
