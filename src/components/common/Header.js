@@ -14,11 +14,7 @@ const Header = () => {
       <div className="flex flex-row justify-between py-8 items-center">
         <Link to="/" className="text-3xl font-medium"></Link>
         <button onClick={setTheme} className="focus:outline-none">
-          {theme === "light" ? (
-            <img src={moonImage} className="h-8" alt="Dark Mode" />
-          ) : (
-            <img src={sunImage} className="h-8" alt="Light Mode" />
-          )}
+          <img src={theme === "dark" ? sunImage : moonImage} className="h-8" alt="Dark Mode" />
         </button>
       </div>
       <div className="flex flex-row justify-between border-b border-gray-400 pb-3 items-center">
