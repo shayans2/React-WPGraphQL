@@ -1,8 +1,13 @@
 import React from "react";
 import Resource from "../containers/Resource";
 import { GET_PAGE } from "../graphql/queries/singlePage";
+import { useTheme } from "../hooks/useTheme";
 
 const SinglePost = ({ match }) => {
+  const { theme } = useTheme();
+  const themeClassName = `${
+    theme === "dark" ? "text-gray-100" : "text-gray-900"
+  }`;
   return (
     <Resource
       query={GET_PAGE}
@@ -23,10 +28,13 @@ const SinglePost = ({ match }) => {
               />
             </div>
           )}
-          <h1 className="text-gray-900 font-bold text-5xl mb-2">
+          <h1 className={`${themeClassName} font-bold text-5xl mb-2`}>
             {data.page.title}
           </h1>
-          <div className="text-gray-800 font-light text-lg" dangerouslySetInnerHTML={{ __html: data.page.content}}></div>
+          <div
+            className={`${themeClassName} font-light text-lg`}
+            dangerouslySetInnerHTML={{ __html: data.page.content }}
+          ></div>
         </div>
       )}
     />

@@ -3,8 +3,13 @@ import Resource from "../containers/Resource";
 import { GET_POST } from "../graphql/queries/singlePost";
 import CommentsFormContainer from "../containers/CommentsForm";
 import avatarImage from "../dist/images/default-avatar.png";
+import { useTheme } from "../hooks/useTheme";
 
 const SinglePost = ({ match }) => {
+  const { theme } = useTheme();
+  const themeClassName = `${
+    theme === "dark" ? "text-gray-100" : "text-gray-900"
+  }`;
   return (
     <Resource
       query={GET_POST}
@@ -25,7 +30,7 @@ const SinglePost = ({ match }) => {
               />
             </div>
           )}
-          <h1 className="text-gray-900 font-bold text-5xl mb-2">
+          <h1 className={`${themeClassName} font-bold text-5xl mb-2`}>
             {data.postBy.title}
           </h1>
           <p className="text-xl font-light text-gray-600 mb-16">
@@ -37,9 +42,14 @@ const SinglePost = ({ match }) => {
               </span>
             ))}
           </p>
-          <div className="text-gray-800 font-light text-lg" dangerouslySetInnerHTML={{ __html: data.postBy.content }}></div>
+          <div
+            className={`${themeClassName} font-light text-lg`}
+            dangerouslySetInnerHTML={{ __html: data.postBy.content }}
+          ></div>
           <div className="mt-24">
-            <h2 className="text-gray-800 font-bold text-2xl">Comments</h2>
+            <h2 className={`${themeClassName}  font-bold text-2xl`}>
+              Comments
+            </h2>
 
             {data.postBy.comments.length !== 0 &&
               data.postBy.comments.nodes.map((comment) => (
@@ -55,11 +65,15 @@ const SinglePost = ({ match }) => {
                     />
                     <div>
                       <div className="flex items-center justify-between">
-                        <h2 className="text-lg font-semibold text-gray-900 -mt-1">
+                        <h2
+                          className={`${themeClassName}  text-lg font-semibold -mt-1`}
+                        >
                           {comment.author.node.name}
                         </h2>
                       </div>
-                      <div className="mt-1 text-gray-700 text-sm" dangerouslySetInnerHTML={{ __html: comment.content }}></div>
+                      <div className={`${themeClassName} mt-1 text-sm`}>
+                        {comment.content.replace(/(<([^>]+)>)/gi, "")}
+                      </div>
                     </div>
                   </div>
                 </div>

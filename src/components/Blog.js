@@ -3,8 +3,13 @@ import { GET_ALL_POSTS } from "../graphql/queries/blog";
 import Resource from "../containers/Resource";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import { useTheme } from "../hooks/useTheme";
 
 const HomePage = ({ preFetchPost }) => {
+  const { theme } = useTheme();
+  const themeClassName = `${
+    theme === "dark" ? "text-gray-100" : "text-gray-900"
+  }`;
   const offset = 10;
   const [loading, setLoading] = useState(false);
   const updateQuery = (previousResult, { fetchMoreResult }) => {
@@ -23,7 +28,7 @@ const HomePage = ({ preFetchPost }) => {
       render={(data, fetchMore) => (
         <section className="mb-56 animate__animated animate__fadeIn">
           <div className="flex flex-row justify-between items-center mb-10">
-            <span className="text-5xl font-bold"> Blog </span>
+            <span className={`text-5xl font-bold ${themeClassName}`}>Blog</span>
           </div>
           {data.posts.edges.map((post) => (
             <div
@@ -35,7 +40,7 @@ const HomePage = ({ preFetchPost }) => {
             >
               <Link
                 to={`/posts${post.node.uri}`}
-                className="text-2xl font-light text-gray-800 hover:underline"
+                className={`text-2xl font-light hover:underline ${themeClassName}`}
               >
                 {post.node.title}
               </Link>

@@ -11,10 +11,11 @@ import SinglePage from "../containers/SinglePage";
 import Blog from "../containers/Blog";
 import SinglePost from "../containers/SinglePost";
 import NotFound from "../components/errors/404";
+import { ThemeProvider } from "../hooks/useTheme";
 
 import "../dist/css/tailwind.css";
 import "react-toastify/dist/ReactToastify.css";
-import "animate.css"
+import "animate.css";
 
 const App = () => {
   const client = new ApolloClient({
@@ -23,7 +24,7 @@ const App = () => {
   });
 
   return (
-    <div className="mx-auto max-w-5xl px-10">
+    <ThemeProvider>
       <ToastContainer />
       <Router history={history}>
         <ScrollToTop>
@@ -41,7 +42,7 @@ const App = () => {
           </ApolloProvider>
         </ScrollToTop>
       </Router>
-    </div>
+    </ThemeProvider>
   );
 };
 

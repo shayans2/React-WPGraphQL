@@ -3,8 +3,13 @@ import { GET_HOME } from "../graphql/queries/home";
 import Resource from "../containers/Resource";
 import { Link } from "react-router-dom";
 import _ from "lodash";
+import { useTheme } from "../hooks/useTheme";
 
 const HomePage = ({ preFetchPost }) => {
+  const { theme } = useTheme();
+  const themeClassName = `${
+    theme === "dark" ? "text-gray-100" : "text-gray-900"
+  }`;
   return (
     <Fragment>
       <Resource
@@ -18,16 +23,18 @@ const HomePage = ({ preFetchPost }) => {
         render={(data) => (
           <Fragment>
             <section className="mb-64 mt-40 animate__animated animate__fadeIn">
-              <h1 className="text-gray-900 font-bold text-5xl mb-4">
+              <h1 className={`${themeClassName} font-bold text-5xl mb-4`}>
                 {data.page.title}
               </h1>
-              <p className="text-gray-800 font-light text-2xl">
+              <p className={`${themeClassName} font-light text-2xl`}>
                 {data.page.content.replace(/(<([^>]+)>)/gi, "")}
               </p>
             </section>
             <section className="mb-56">
               <div className="flex flex-row justify-between border-b border-gray-400 pb-3 items-center mb-10">
-                <span className="text-3xl font-medium"> Latest Posts </span>
+                <span className={`${themeClassName} text-3xl font-medium`}>
+                  Latest Posts
+                </span>
                 <Link to="/blog" className="text-gray-600">
                   Read all posts
                 </Link>
@@ -43,7 +50,7 @@ const HomePage = ({ preFetchPost }) => {
                 >
                   <Link
                     to={`/posts${post.node.uri}`}
-                    className="text-2xl font-light text-gray-800 hover:underline"
+                    className={`${themeClassName} text-2xl font-light hover:underline`}
                   >
                     {post.node.title}
                   </Link>
@@ -59,11 +66,13 @@ const HomePage = ({ preFetchPost }) => {
 
       <section>
         <div className="border-b border-gray-400 pb-3 mb-10">
-          <span className="text-3xl font-medium"> Projects </span>
+          <span className={`${themeClassName} text-3xl font-medium`}>
+            Projects
+          </span>
         </div>
         <div className="mb-4">
           <a
-            className="text-2xl font-light text-gray-800"
+            className={`${themeClassName} text-2xl font-light`}
             href="https://github.com/shayans2/Instagram-Clone"
             target="_blank"
             rel="noopener noreferrer"
@@ -73,7 +82,7 @@ const HomePage = ({ preFetchPost }) => {
         </div>
         <div className="mb-4">
           <a
-            className="text-2xl font-light text-gray-800"
+            className={`${themeClassName} text-2xl font-light`}
             href="https://github.com/shayans2/React-WPGraphQL"
             target="_blank"
             rel="noopener noreferrer"

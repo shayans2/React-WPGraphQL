@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { useForm } from "../utils/handleForm";
+import { useForm } from "../hooks/useForm";
 import CommentsForm from "../components/CommentsForm";
 import { CREATE_COMMENT } from "../graphql/mutations/comments";
 import Joi from "joi";
