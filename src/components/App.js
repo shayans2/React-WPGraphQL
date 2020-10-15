@@ -20,7 +20,7 @@ import "animate.css";
 const App = () => {
   const client = new ApolloClient({
     cache: new InMemoryCache(),
-    uri: "https://baharbeauty.co/graphql", // Use your WPGraphql url here. example: http://yourwebsite.com/wordpress/graphql
+    uri: "", // Use your WPGraphql url here. example: http://yourwebsite.com/wordpress/graphql
   });
 
   return (

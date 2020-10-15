@@ -1,11 +1,14 @@
 import React from "react";
-import loading from "../../dist/images/loading.svg";
+import darkLoader from "../../dist/images/loading-dark.svg";
+import lightLoader from "../../dist/images/loading-light.svg";
+import { useTheme } from "../../hooks/useTheme";
 
 const Loading = () => {
+  const { theme } = useTheme();
   return (
     <div>
       <img
-        src={loading}
+        src={theme === "dark" ? darkLoader : lightLoader}
         alt="Loading"
         style={{
           marginRight: "auto",
